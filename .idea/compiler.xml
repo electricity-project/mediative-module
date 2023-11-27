@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="service-core" />
+        <module name="service-infrastructure" />
+        <module name="service-app" />
+        <module name="mediative-kafka-consumer" />
+        <module name="mediative-mqtt-producer" />
+        <module name="service-api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="central-kafka-producer" target="21" />
+      <module name="central-module" target="21" />
+      <module name="mediative-module-producer" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

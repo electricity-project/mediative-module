@@ -1,0 +1,31 @@
+name: mediative-system
+services:
+  log_db:
+    image: postgres
+    container_name: log_db_container
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: log_db
+    ports:
+      - "5002:5432"
+    healthcheck:
+      test: "exit 0"
+
+  mediative-module:
+    build:
+      context: .
+    environment:
+      MQTT_CLIENT_USERNAME: rabbitmq-user
+      MQTT_CLIENT_PASSWORD: password
+      MQTT_BROKER_URL: tcp://rabbitmq:1883
+      KAFKA_BROKER_ADDRESS: kafka_container:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://log_db:5432/log_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8081:8080"
+    depends_on:
+      log_db:
+        condition: service_healthy
