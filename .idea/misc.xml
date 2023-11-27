@@ -5,8 +5,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/mediative-mqtt-producer/pom.xml" />
-        <option value="$PROJECT_DIR$/mediative-kafka-consumer/pom.xml" />
       </list>
     </option>
   </component>
