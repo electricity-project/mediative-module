@@ -4,7 +4,6 @@ import com.electricity.project.mediativemodule.mediativekafkaconsumer.api.PowerP
 import com.electricity.project.mediativemodule.mediativekafkaconsumer.configuration.KafkaDefaultConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.AggregationStrategies;
 import org.apache.camel.builder.RouteBuilder;
@@ -23,25 +22,14 @@ public class PowerProductionRoute extends RouteBuilder {
     @Override
     public void configure() {
         from(KafkaDefaultConfiguration.KAFKA_COMPONENT_NAME + ":" + kafkaTopic)
+                .unmarshal().json(JsonLibrary.Jackson, PowerProductionDTO.class)
                 .aggregate(constant(true), AggregationStrategies
-                        .flexible(String.class)
+                        .flexible(PowerProductionDTO.class)
                         .accumulateInCollection(ArrayList.class)
-                        .pick(body()))
-                .completionSize(2)
-                .log(body().toString());
-//            .unmarshal().json(JsonLibrary.Jackson, PowerProductionDTO.class)
-//            .aggregate(constant(true), AggregationStrategies
-//                        .flexible(PowerProductionDTO.class)
-//                        .accumulateInCollection(ArrayList.class)
-//                        .pick(body())
-//            ).completionInterval(2000)
-//                .completionTimeout(1000)
-//                .completionSize(300)
-//            .parallelProcessing(true)
-//            .marshal().json(JsonLibrary.Jackson, String.class)
-//            .setHeader(Exchange.HTTP_METHOD, simple("POST"))
-//            .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
-//            .log(LoggingLevel.DEBUG, log, "The body was - ${body}");
-//            .to("{{calculation.database.application.address}}" + CALCULATIONS_POWER_PRODUCTION_ENDPOINT);
+                        .pick(body())
+                ).completionSize(3)
+                .parallelProcessing(true)
+                .marshal().json(JsonLibrary.Jackson, String.class)
+                .log(LoggingLevel.INFO, log, "The body was - ${body}");
     }
 }

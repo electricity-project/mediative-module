@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @Value.Immutable
@@ -14,23 +14,19 @@ import java.util.Optional;
 @JsonDeserialize(as = ImmutablePowerProductionDTO.class)
 public interface PowerProductionDTO {
 
-    static ImmutablePowerProductionDTO.Builder builder() {
-        return ImmutablePowerProductionDTO.builder();
-    }
-
     @JsonProperty(value = "id")
     Optional<Long> getId();
 
-    @JsonProperty(value = "ipv6", required = true)
+    @JsonProperty(value = "ipv6Address", required = true)
     String getIpv6Address();
 
     @JsonProperty(value = "state", required = true)
     PowerStationState getState();
 
-    @JsonProperty(value = "producedPower", required = true)
+    @JsonProperty(value = "power", required = true)
     Long getProducedPower();
 
     @JsonProperty(value = "timestamp", required = true)
-    LocalDateTime getTimestamp();
+    ZonedDateTime getTimestamp();
 
 }

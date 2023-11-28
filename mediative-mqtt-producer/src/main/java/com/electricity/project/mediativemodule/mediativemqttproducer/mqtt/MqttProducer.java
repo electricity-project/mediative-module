@@ -36,9 +36,6 @@ public class MqttProducer {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .build();
 
-    @Value("${mqtt.producer.topic}")
-    private String powerStationTopic;
-
     @Scheduled(fixedRateString = "${mqtt.message.producer.rate.ms}")
     public void sendMessage() {
         ipv6List.forEach(ipv6 -> {
@@ -49,8 +46,7 @@ public class MqttProducer {
                     .state(PowerStationState.WORKING)
                     .build();
             try {
-                log.info("[MOCKED] Sending data to MQTT broker: {}", powerProductionMessage);
-                log.info("WIN 3");
+                log.info("Sending data to MQTT broker: {}", powerProductionMessage);
                 powerProductionGateway.sendToMqtt(objectMapper.writeValueAsString(powerProductionMessage));
             } catch (JsonProcessingException e) {
                 log.error("Error processing object: {}", powerProductionMessage, e);

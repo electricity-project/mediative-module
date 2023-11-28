@@ -8,7 +8,6 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import org.immutables.value.Generated;
 
 /**
@@ -22,32 +21,20 @@ import org.immutables.value.Generated;
 @javax.annotation.processing.Generated("org.immutables.processor.ProxyProcessor")
 public final class ImmutablePowerProductionDTO
     implements PowerProductionDTO {
-  private final Long id;
   private final String ipv6Address;
   private final PowerStationState state;
   private final Long producedPower;
   private final ZonedDateTime timestamp;
 
   private ImmutablePowerProductionDTO(
-      Long id,
       String ipv6Address,
       PowerStationState state,
       Long producedPower,
       ZonedDateTime timestamp) {
-    this.id = id;
     this.ipv6Address = ipv6Address;
     this.state = state;
     this.producedPower = producedPower;
     this.timestamp = timestamp;
-  }
-
-  /**
-   * @return The value of the {@code id} attribute
-   */
-  @JsonProperty("id")
-  @Override
-  public Optional<Long> getId() {
-    return Optional.ofNullable(id);
   }
 
   /**
@@ -87,29 +74,6 @@ public final class ImmutablePowerProductionDTO
   }
 
   /**
-   * Copy the current immutable object by setting a <i>present</i> value for the optional {@link PowerProductionDTO#getId() id} attribute.
-   * @param value The value for id
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutablePowerProductionDTO withId(long value) {
-    Long newValue = value;
-    if (Objects.equals(this.id, newValue)) return this;
-    return new ImmutablePowerProductionDTO(newValue, this.ipv6Address, this.state, this.producedPower, this.timestamp);
-  }
-
-  /**
-   * Copy the current immutable object by setting an optional value for the {@link PowerProductionDTO#getId() id} attribute.
-   * An equality check is used on inner nullable value to prevent copying of the same value by returning {@code this}.
-   * @param optional A value for id
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutablePowerProductionDTO withId(Optional<Long> optional) {
-    Long value = optional.orElse(null);
-    if (Objects.equals(this.id, value)) return this;
-    return new ImmutablePowerProductionDTO(value, this.ipv6Address, this.state, this.producedPower, this.timestamp);
-  }
-
-  /**
    * Copy the current immutable object by setting a value for the {@link PowerProductionDTO#getIpv6Address() ipv6Address} attribute.
    * An equals check used to prevent copying of the same value by returning {@code this}.
    * @param value A new value for ipv6Address
@@ -118,7 +82,7 @@ public final class ImmutablePowerProductionDTO
   public final ImmutablePowerProductionDTO withIpv6Address(String value) {
     String newValue = Objects.requireNonNull(value, "ipv6Address");
     if (this.ipv6Address.equals(newValue)) return this;
-    return new ImmutablePowerProductionDTO(this.id, newValue, this.state, this.producedPower, this.timestamp);
+    return new ImmutablePowerProductionDTO(newValue, this.state, this.producedPower, this.timestamp);
   }
 
   /**
@@ -130,7 +94,7 @@ public final class ImmutablePowerProductionDTO
   public final ImmutablePowerProductionDTO withState(PowerStationState value) {
     PowerStationState newValue = Objects.requireNonNull(value, "state");
     if (this.state == newValue) return this;
-    return new ImmutablePowerProductionDTO(this.id, this.ipv6Address, newValue, this.producedPower, this.timestamp);
+    return new ImmutablePowerProductionDTO(this.ipv6Address, newValue, this.producedPower, this.timestamp);
   }
 
   /**
@@ -142,7 +106,7 @@ public final class ImmutablePowerProductionDTO
   public final ImmutablePowerProductionDTO withProducedPower(Long value) {
     Long newValue = Objects.requireNonNull(value, "producedPower");
     if (this.producedPower.equals(newValue)) return this;
-    return new ImmutablePowerProductionDTO(this.id, this.ipv6Address, this.state, newValue, this.timestamp);
+    return new ImmutablePowerProductionDTO(this.ipv6Address, this.state, newValue, this.timestamp);
   }
 
   /**
@@ -154,7 +118,7 @@ public final class ImmutablePowerProductionDTO
   public final ImmutablePowerProductionDTO withTimestamp(ZonedDateTime value) {
     if (this.timestamp == value) return this;
     ZonedDateTime newValue = Objects.requireNonNull(value, "timestamp");
-    return new ImmutablePowerProductionDTO(this.id, this.ipv6Address, this.state, this.producedPower, newValue);
+    return new ImmutablePowerProductionDTO(this.ipv6Address, this.state, this.producedPower, newValue);
   }
 
   /**
@@ -169,21 +133,19 @@ public final class ImmutablePowerProductionDTO
   }
 
   private boolean equalTo(int synthetic, ImmutablePowerProductionDTO another) {
-    return Objects.equals(id, another.id)
-        && ipv6Address.equals(another.ipv6Address)
+    return ipv6Address.equals(another.ipv6Address)
         && state.equals(another.state)
         && producedPower.equals(another.producedPower)
         && timestamp.equals(another.timestamp);
   }
 
   /**
-   * Computes a hash code from attributes: {@code id}, {@code ipv6Address}, {@code state}, {@code producedPower}, {@code timestamp}.
+   * Computes a hash code from attributes: {@code ipv6Address}, {@code state}, {@code producedPower}, {@code timestamp}.
    * @return hashCode value
    */
   @Override
   public int hashCode() {
     int h = 5381;
-    h += (h << 5) + Objects.hashCode(id);
     h += (h << 5) + ipv6Address.hashCode();
     h += (h << 5) + state.hashCode();
     h += (h << 5) + producedPower.hashCode();
@@ -197,19 +159,12 @@ public final class ImmutablePowerProductionDTO
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder("PowerProductionDTO{");
-    if (id != null) {
-      builder.append("id=").append(id);
-    }
-    if (builder.length() > 19) builder.append(", ");
-    builder.append("ipv6Address=").append(ipv6Address);
-    builder.append(", ");
-    builder.append("state=").append(state);
-    builder.append(", ");
-    builder.append("producedPower=").append(producedPower);
-    builder.append(", ");
-    builder.append("timestamp=").append(timestamp);
-    return builder.append("}").toString();
+    return "PowerProductionDTO{"
+        + "ipv6Address=" + ipv6Address
+        + ", state=" + state
+        + ", producedPower=" + producedPower
+        + ", timestamp=" + timestamp
+        + "}";
   }
 
   /**
@@ -222,15 +177,10 @@ public final class ImmutablePowerProductionDTO
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
   static final class Json
       implements PowerProductionDTO {
-    Optional<Long> id = Optional.empty();
     String ipv6Address;
     PowerStationState state;
     Long producedPower;
     ZonedDateTime timestamp;
-    @JsonProperty("id")
-    public void setId(Optional<Long> id) {
-      this.id = id;
-    }
     @JsonProperty(value = "ipv6Address", required = true)
     public void setIpv6Address(String ipv6Address) {
       this.ipv6Address = ipv6Address;
@@ -247,8 +197,6 @@ public final class ImmutablePowerProductionDTO
     public void setTimestamp(ZonedDateTime timestamp) {
       this.timestamp = timestamp;
     }
-    @Override
-    public Optional<Long> getId() { throw new UnsupportedOperationException(); }
     @Override
     public String getIpv6Address() { throw new UnsupportedOperationException(); }
     @Override
@@ -268,9 +216,6 @@ public final class ImmutablePowerProductionDTO
   @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
   static ImmutablePowerProductionDTO fromJson(Json json) {
     ImmutablePowerProductionDTO.Builder builder = ImmutablePowerProductionDTO.builder();
-    if (json.id != null) {
-      builder.id(json.id);
-    }
     if (json.ipv6Address != null) {
       builder.ipv6Address(json.ipv6Address);
     }
@@ -306,7 +251,6 @@ public final class ImmutablePowerProductionDTO
    * Creates a builder for {@link ImmutablePowerProductionDTO ImmutablePowerProductionDTO}.
    * <pre>
    * ImmutablePowerProductionDTO.builder()
-   *    .id(Long) // optional {@link PowerProductionDTO#getId() id}
    *    .ipv6Address(String) // required {@link PowerProductionDTO#getIpv6Address() ipv6Address}
    *    .state(com.electricity.project.mediativemodule.powerproduction.PowerStationState) // required {@link PowerProductionDTO#getState() state}
    *    .producedPower(Long) // required {@link PowerProductionDTO#getProducedPower() producedPower}
@@ -334,7 +278,6 @@ public final class ImmutablePowerProductionDTO
     private static final long INIT_BIT_TIMESTAMP = 0x8L;
     private long initBits = 0xfL;
 
-    private Long id;
     private String ipv6Address;
     private PowerStationState state;
     private Long producedPower;
@@ -352,35 +295,10 @@ public final class ImmutablePowerProductionDTO
      */
     public final Builder from(PowerProductionDTO instance) {
       Objects.requireNonNull(instance, "instance");
-      Optional<Long> idOptional = instance.getId();
-      if (idOptional.isPresent()) {
-        id(idOptional);
-      }
       ipv6Address(instance.getIpv6Address());
       state(instance.getState());
       producedPower(instance.getProducedPower());
       timestamp(instance.getTimestamp());
-      return this;
-    }
-
-    /**
-     * Initializes the optional value {@link PowerProductionDTO#getId() id} to id.
-     * @param id The value for id
-     * @return {@code this} builder for chained invocation
-     */
-    public final Builder id(long id) {
-      this.id = id;
-      return this;
-    }
-
-    /**
-     * Initializes the optional value {@link PowerProductionDTO#getId() id} to id.
-     * @param id The value for id
-     * @return {@code this} builder for use in a chained invocation
-     */
-    @JsonProperty("id")
-    public final Builder id(Optional<Long> id) {
-      this.id = id.orElse(null);
       return this;
     }
 
@@ -441,7 +359,7 @@ public final class ImmutablePowerProductionDTO
       if (initBits != 0) {
         throw new IllegalStateException(formatRequiredAttributesMessage());
       }
-      return new ImmutablePowerProductionDTO(id, ipv6Address, state, producedPower, timestamp);
+      return new ImmutablePowerProductionDTO(ipv6Address, state, producedPower, timestamp);
     }
 
     private String formatRequiredAttributesMessage() {
