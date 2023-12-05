@@ -5,4 +5,3 @@ com/electricity/project/mediativemodule/mediativemqttproducer/mqtt/MqttProducer$
 com/electricity/project/mediativemodule/mediativemqttproducer/MediativeMqttProducerApplication.class
 com/electricity/project/mediativemodule/mediativemqttproducer/mqtt/MqttProducer.class
 com/electricity/project/mediativemodule/mediativemqttproducer/configuration/MqttConfiguration.class
-com/electricity/project/mediativemodule/mediativemqttproducer/configuration/PowerProductionGatewayDev.class

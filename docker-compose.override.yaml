@@ -36,7 +36,7 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: password
     ports:
-      - "8081:8080"
+      - "8082:8082"
     depends_on:
       kafka:
         condition: service_started
@@ -45,7 +45,7 @@ services:
       rabbitmq:
         condition: service_healthy
 
-  mediative-mqtt-producer:
+  mediative-mqtt-producer: #comment for api to work while dev
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -94,3 +94,33 @@ services:
       retries: 3
     ports:
       - 1883:1883
+# uncomment for mediative api to work for dev
+#  simulation-db:
+#    image: postgres:latest
+#    healthcheck:
+#      test: exit 0
+#    environment:
+#      POSTGRES_USER: simulation-user
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: simulation-db
+#    ports:
+#      - "5004:5432"
+#
+#  simulation-module:
+#    depends_on:
+#      simulation-db:
+#        condition: service_healthy
+#      rabbitmq:
+#        condition: service_healthy
+#    build:
+#      context: ../simulation-module/. #set correct location
+#    environment:
+#      WEATHER_API_KEY: ${WEATHER_API_KEY}
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://simulation-db:5432/simulation-db
+#      SPRING_DATASOURCE_USERNAME: simulation-user
+#      SPRING_DATASOURCE_PASSWORD: password
+#      MQTT_CLIENT_USERNAME: rabbitmq-user
+#      MQTT_CLIENT_PASSWORD: password
+#      MQTT_BROKER_URL: tcp://rabbitmq:1883
+#    ports:
+#      - 8080:8080

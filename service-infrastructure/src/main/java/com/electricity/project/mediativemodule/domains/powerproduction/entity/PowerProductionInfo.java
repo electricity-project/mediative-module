@@ -1,5 +1,6 @@
 package com.electricity.project.mediativemodule.domains.powerproduction.entity;
 
+import com.electricity.project.mediativemodule.powerstation.PowerStationState;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import com.electricity.project.mediativemodule.powerproduction.PowerStationState;
 
 import java.time.ZonedDateTime;
 
@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
 @SuperBuilder
 @Getter
 @Setter
-public class PowerStationInfo {
+public class PowerProductionInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

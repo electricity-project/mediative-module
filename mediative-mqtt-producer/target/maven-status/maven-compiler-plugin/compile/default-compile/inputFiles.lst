@@ -3,4 +3,3 @@
 /home/miwan/Electricity_project/mediative-module/mediative-mqtt-producer/src/main/java/com/electricity/project/mediativemodule/mediativemqttproducer/mqtt/MqttProducer.java
 /home/miwan/Electricity_project/mediative-module/mediative-mqtt-producer/src/main/java/com/electricity/project/mediativemodule/mediativemqttproducer/configuration/MqttConfiguration.java
 /home/miwan/Electricity_project/mediative-module/mediative-mqtt-producer/src/main/java/com/electricity/project/mediativemodule/mediativemqttproducer/configuration/PowerProductionGateway.java
-/home/miwan/Electricity_project/mediative-module/mediative-mqtt-producer/src/main/java/com/electricity/project/mediativemodule/mediativemqttproducer/configuration/PowerProductionGatewayDev.java

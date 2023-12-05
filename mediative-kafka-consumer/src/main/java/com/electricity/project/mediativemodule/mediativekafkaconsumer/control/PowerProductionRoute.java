@@ -27,7 +27,7 @@ public class PowerProductionRoute extends RouteBuilder {
                         .flexible(PowerProductionDTO.class)
                         .accumulateInCollection(ArrayList.class)
                         .pick(body())
-                ).completionSize(3)
+                ).completionInterval(1000)
                 .parallelProcessing(true)
                 .marshal().json(JsonLibrary.Jackson, String.class)
                 .log(LoggingLevel.INFO, log, "The body was - ${body}");

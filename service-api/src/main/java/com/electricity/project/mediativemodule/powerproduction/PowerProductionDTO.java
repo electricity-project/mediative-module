@@ -1,5 +1,6 @@
 package com.electricity.project.mediativemodule.powerproduction;
 
+import com.electricity.project.mediativemodule.powerstation.PowerStationState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

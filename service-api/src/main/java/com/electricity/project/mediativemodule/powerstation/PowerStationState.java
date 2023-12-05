@@ -1,4 +1,4 @@
-package com.electricity.project.mediativemodule.powerproduction;
+package com.electricity.project.mediativemodule.powerstation;
 
 public enum PowerStationState {
     WORKING,
