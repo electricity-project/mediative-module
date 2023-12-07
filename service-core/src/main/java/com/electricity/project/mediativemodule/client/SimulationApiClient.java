@@ -1,5 +1,8 @@
 package com.electricity.project.mediativemodule.client;
 
+import com.electricity.project.mediativemodule.changestatuslog.StationStatus;
+import com.electricity.project.mediativemodule.control.StationStatusChangeMapper;
+import com.electricity.project.mediativemodule.control.StationStatusChangeService;
 import com.electricity.project.mediativemodule.systemapi.PowerStationInfoDTO;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,9 +18,11 @@ import java.time.Duration;
 @Component
 public class SimulationApiClient implements SimulationClient{
 
+    private final StationStatusChangeService stationStatusChangeService;
     private final WebClient client;
 
-    public SimulationApiClient(@Value("${simulation.system.url}") String baseUrl) {
+    public SimulationApiClient(StationStatusChangeService stationStatusChangeService, @Value("${simulation.system.url}") String baseUrl) {
+        this.stationStatusChangeService = stationStatusChangeService;
         HttpClient httpClient = HttpClient.create().responseTimeout(Duration.ofSeconds(10));
         client = WebClient.builder()
                 .baseUrl(baseUrl)
@@ -27,7 +32,7 @@ public class SimulationApiClient implements SimulationClient{
 
     @Override
     public PowerStationInfoDTO getInfo(@NonNull String ipv6Address) {
-        PowerStationInfoDTO dto = client.get()
+        return client.get()
                 .uri("/info", uriBuilder -> uriBuilder
                         .queryParam("ipv6Address", ipv6Address)
                         .build())
@@ -37,8 +42,6 @@ public class SimulationApiClient implements SimulationClient{
                 .bodyToMono(PowerStationInfoDTO.class)
                 .retry(3)
                 .block();
-        System.out.println(dto);
-        return dto;
     }
 
     @Override
@@ -52,6 +55,7 @@ public class SimulationApiClient implements SimulationClient{
                 .retrieve()
                 .bodyToMono(Void.class)
                 .retry(3)
+                .doOnSuccess(response -> stationStatusChangeService.save(StationStatusChangeMapper.mapToEntity(ipv6Address, StationStatus.CONNECTED)))
                 .block();
     }
 
@@ -66,12 +70,13 @@ public class SimulationApiClient implements SimulationClient{
                 .retrieve()
                 .bodyToMono(Void.class)
                 .retry(3)
+                .doOnSuccess(response -> stationStatusChangeService.save(StationStatusChangeMapper.mapToEntity(ipv6Address, StationStatus.DISCONNECTED)))
                 .block();
     }
 
     @Override
     public Void startPowerStation(@NonNull String ipv6Address) {
-        return client.get()
+         return client.get()
                 .uri("/start", uriBuilder -> uriBuilder
                         .queryParam("ipv6Address", ipv6Address)
                         .build())
@@ -80,6 +85,7 @@ public class SimulationApiClient implements SimulationClient{
                 .retrieve()
                 .bodyToMono(Void.class)
                 .retry(3)
+                .doOnSuccess(response -> stationStatusChangeService.save(StationStatusChangeMapper.mapToEntity(ipv6Address, StationStatus.STARTED)))
                 .block();
     }
 
@@ -94,6 +100,7 @@ public class SimulationApiClient implements SimulationClient{
                 .retrieve()
                 .bodyToMono(Void.class)
                 .retry(3)
+                .doOnSuccess(response -> stationStatusChangeService.save(StationStatusChangeMapper.mapToEntity(ipv6Address, StationStatus.STOPPED)))
                 .block();
     }
 }
