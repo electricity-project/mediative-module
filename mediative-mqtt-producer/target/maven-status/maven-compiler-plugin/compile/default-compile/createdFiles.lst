@@ -1,0 +1,7 @@
+com/electricity/project/mediativemodule/mediativemqttproducer/mqtt/MqttProducer$PowerProductionMessage$PowerProductionMessageBuilder.class
+com/electricity/project/mediativemodule/mediativemqttproducer/configuration/PowerProductionGateway.class
+com/electricity/project/mediativemodule/mediativemqttproducer/api/PowerStationState.class
+com/electricity/project/mediativemodule/mediativemqttproducer/mqtt/MqttProducer$PowerProductionMessage.class
+com/electricity/project/mediativemodule/mediativemqttproducer/MediativeMqttProducerApplication.class
+com/electricity/project/mediativemodule/mediativemqttproducer/mqtt/MqttProducer.class
+com/electricity/project/mediativemodule/mediativemqttproducer/configuration/MqttConfiguration.class
