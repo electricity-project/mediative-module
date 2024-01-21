@@ -29,15 +29,15 @@ public class PowerProductionRoute extends RouteBuilder {
                 .unmarshal()
                 .json(JsonLibrary.Jackson, PowerProductionDTO.class)
                 .aggregate(constant(true), AggregationStrategies.flexible(PowerProductionDTO.class)
-                    .accumulateInCollection(ArrayList.class)
-                    .pick(body()))
+                        .accumulateInCollection(ArrayList.class)
+                        .pick(body()))
                 .completionInterval(1000)
                 .parallelProcessing(true)
                 .bean(PowerProductionInfoService.class, "saveAll(${body})")
                 .split(body()).parallelProcessing()
                 .marshal()
                 .json(JsonLibrary.Jackson, String.class)
-                .to("kafka:" + kafkaProducerTopic + "?brokers="+ kafkaBrokerUrl);
+                .to("kafka:" + kafkaProducerTopic + "?brokers=" + kafkaBrokerUrl);
 
     }
 }

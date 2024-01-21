@@ -37,6 +37,7 @@ public class MediativeApiResource {
     public ResponseEntity<Void> startPowerStation(@RequestParam String ipv6Address) {
         return ResponseEntity.ok(simulationApiClient.startPowerStation(ipv6Address));
     }
+
     @GetMapping("/stop")
     public ResponseEntity<Void> stopPowerStation(@RequestParam String ipv6Address) {
         return ResponseEntity.ok(simulationApiClient.stopPowerStation(ipv6Address));

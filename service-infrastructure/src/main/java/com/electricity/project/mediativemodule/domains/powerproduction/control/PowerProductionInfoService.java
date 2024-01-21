@@ -13,6 +13,7 @@ import java.util.List;
 
 public class PowerProductionInfoService {
     private final PowerProductionInfoRepository powerProductionInfoRepository;
+
     public void saveAll(List<PowerProductionDTO> powerProductionDTOList) {
         powerProductionInfoRepository.saveAll(powerProductionDTOList.stream().map(PowerProductionInfoMapper::mapToEntity).toList());
     }

@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 @Component
-public class SimulationApiClient implements SimulationClient{
+public class SimulationApiClient implements SimulationClient {
 
     private final StationStatusChangeService stationStatusChangeService;
     private final WebClient client;
@@ -76,7 +76,7 @@ public class SimulationApiClient implements SimulationClient{
 
     @Override
     public Void startPowerStation(@NonNull String ipv6Address) {
-         return client.get()
+        return client.get()
                 .uri("/start", uriBuilder -> uriBuilder
                         .queryParam("ipv6Address", ipv6Address)
                         .build())
