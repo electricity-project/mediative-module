@@ -90,9 +90,10 @@ public class SimulationApiClient implements SimulationClient {
     }
 
     @Override
-    public Void stopPowerStation(@NonNull String ipv6Address) {
+    public Void stopPowerStation(@NonNull String ipv6Address, boolean stoppedByUser) {
+        String uri = stoppedByUser ? "/manual-stop" : "/stop";
         return client.get()
-                .uri("/stop", uriBuilder -> uriBuilder
+                .uri(uri, uriBuilder -> uriBuilder
                         .queryParam("ipv6Address", ipv6Address)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)

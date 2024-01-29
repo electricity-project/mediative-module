@@ -7,5 +7,5 @@ public interface SimulationClient {
     Void connectToSystem(@NonNull String ipv6Address);
     Void disconnectFromSystem(@NonNull String ipv6Address);
     Void startPowerStation(@NonNull String ipv6Address);
-    Void stopPowerStation(@NonNull String ipv6Address);
+    Void stopPowerStation(@NonNull String ipv6Address, boolean stoppedByUser);
 }
